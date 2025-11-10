@@ -4,6 +4,8 @@ services:
   webserver:
     build:
       context: ./bin/${PHPVERSION}
+    security_opt:
+      - seccomp:unconfined
     container_name: "${COMPOSE_PROJECT_NAME}-${PHPVERSION}"
     restart: "always"
     ports:

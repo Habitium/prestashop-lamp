@@ -10,8 +10,8 @@ fi
 
 # Define valid options
 VALID_PHP_VERSIONS=(php54 php56 php71 php72 php73 php74 php8 php81 php82 php83)
-VALID_DATABASE_VERSIONS=(mariadb103 mariadb104 mariadb105 mariadb106)
-DEFAULT_PRESTASHOP_VERSION="8.2.1"
+VALID_DATABASE_VERSIONS=(mysql8 mariadb103 mariadb104 mariadb105 mariadb106)
+DEFAULT_PRESTASHOP_VERSION="8.2.3"
 
 # Function to validate user input
 validate_input() {
@@ -49,10 +49,10 @@ done
 
 # Prompt user for PHP version
 while true; do
-    echo "Select PHP version (default: php83):"
+    echo "Select PHP version (default: php81):"
     echo "Available options: ${VALID_PHP_VERSIONS[*]}"
     read -r PHPVERSION
-    PHPVERSION=${PHPVERSION:-php83}
+    PHPVERSION=${PHPVERSION:-php81}
     if validate_input "$PHPVERSION" "${VALID_PHP_VERSIONS[@]}"; then
         break
     else
@@ -62,10 +62,10 @@ done
 
 # Prompt user for Database version
 while true; do
-    echo "Select Database version (default: mariadb105):"
+    echo "Select Database version (default: mysql8):"
     echo "Available options: ${VALID_DATABASE_VERSIONS[*]}"
     read -r DATABASE
-    DATABASE=${DATABASE:-mariadb105}
+    DATABASE=${DATABASE:-mysql8}
     if validate_input "$DATABASE" "${VALID_DATABASE_VERSIONS[@]}"; then
         break
     else
@@ -137,3 +137,9 @@ cd -
 echo "PrestaShop $PRESTASHOP_VERSION installed in ./www/prestashop.loc/"
 
 echo "Configuration updated in .env file."
+
+# Ensure proper permissions
+TARGET_UID=${SUDO_UID:-$(id -u)}
+TARGET_GID=${SUDO_GID:-$(id -g)}
+chown -R "${TARGET_UID}:${TARGET_GID}" ./www
+chmod -R 755 ./www/prestashop.loc/

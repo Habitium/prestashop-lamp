@@ -51,9 +51,9 @@ sh install.sh
 The script will prompt you for configuration options including:
 
 - Docker project name
-- PHP version
-- Database type
-- PrestaShop version
+- PHP version (php81)
+- Database type (mysql8)
+- PrestaShop version (8.2.3)
 
 Once completed, it will download and install PrestaShop along with the required dependencies.
 
