@@ -51,7 +51,7 @@ sh install.sh
 The script will prompt you for configuration options including:
 
 - Docker project name
-- PHP version (php81)
+- PHP version (php82 = PHP 8.2.34)
 - Database type (mysql8)
 - PrestaShop version (8.2.3)
 
@@ -72,6 +72,18 @@ https://localhost
 ```
 
 This will open the PrestaShop installation assistant.
+
+## Switching an existing install to PHP 8.2
+
+The `php82` image is pinned to PHP 8.2.34, the same version as pre4. To move an existing environment from another PHP version, run this from the LAMP directory:
+
+```sh
+sed -i 's/^PHPVERSION=.*/PHPVERSION=php82/' .env
+docker compose up -d --build --no-deps webserver
+docker compose exec webserver php -v
+```
+
+Only the `webserver` container is rebuilt; the database, Redis and your `www` folder are not touched. To go back, set the previous value (for example `php81`) in `.env` and run the same `docker compose up` command.
 
 ## Database Configuration in PrestaShop Installation
 
