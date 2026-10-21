@@ -49,10 +49,10 @@ done
 
 # Prompt user for PHP version
 while true; do
-    echo "Select PHP version (default: php81):"
+    echo "Select PHP version (default: php82):"
     echo "Available options: ${VALID_PHP_VERSIONS[*]}"
     read -r PHPVERSION
-    PHPVERSION=${PHPVERSION:-php81}
+    PHPVERSION=${PHPVERSION:-php82}
     if validate_input "$PHPVERSION" "${VALID_PHP_VERSIONS[@]}"; then
         break
     else

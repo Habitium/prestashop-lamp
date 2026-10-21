@@ -1,4 +1,6 @@
-FROM php:8.2.1-apache-buster
+# Pinned to the same PHP patch version as pre4 (8.2.34).
+# Debian buster images are no longer published for PHP 8.2.x, so this uses bookworm.
+FROM php:8.2.34-apache-bookworm
 
 # Surpresses debconf complaints of trying to install apt packages interactively
 # https://github.com/moby/moby/issues/4032#issuecomment-192327844
